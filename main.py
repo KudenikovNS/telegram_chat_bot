@@ -13,19 +13,6 @@ dp = Dispatcher(bot)
 async def start_command(message: types.Message):
     await message.answer("Добрый день! Вы можете задать мне вопрос.")
 
-@dp.message_handler(commands=['time'])
-async def time_command(message: types.Message):
-    try:
-        city = message.text.split(" ")[1]
-        url = f"http://worldtimeapi.org/api/timezone/{city}"
-        response = requests.get(url).json()
-        current_time = response["datetime"]
-        await message.answer(f"Текущее время в городе {city}: {current_time}")
-    except Exception as e:
-        print("An error occurred while processing the message: ", e)
-        await message.answer("Произошла ошибка при обработке вашего запроса. Попробуйте еще раз позднее.")
-
-
 @dp.message_handler()
 async def send(message: types.Message):
     try:
